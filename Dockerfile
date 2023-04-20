@@ -1,6 +1,3 @@
-# syntax=docker/dockerfile:1.2
-LABEL maintainer="allan.nava@ies-italia.it"
-ENV DOCKER_BUILDKIT=1
 FROM debian:11 AS builder
 
 MAINTAINER Allan-Nava
