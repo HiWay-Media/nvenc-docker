@@ -9,7 +9,7 @@ on:
       - '*'
 #
 jobs:
-  handbrake-nvenc-imagemagick:
+  nvenc-imagemagick:
     runs-on: ubuntu-latest
     permissions:
       contents: read
