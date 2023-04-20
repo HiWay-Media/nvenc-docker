@@ -1,21 +1,14 @@
 FROM debian:11 AS builder
-#
-MAINTAINER allan.nava@hiway.media
-#
-#ENV HANDBRAKE_VERSION_TAG 1.6.1
-#ENV HANDBRAKE_VERSION_TAG master
-#ENV HANDBRAKE_VERSION_BRANCH 1.6.x
-#ENV HANDBRAKE_VERSION_BRANCH master
-#
+
+MAINTAINER Allan-Nava
+
 ENV HANDBRAKE_VERSION_TAG 1.5.1
 ENV HANDBRAKE_VERSION_BRANCH 1.5.x
-#
 ENV HANDBRAKE_DEBUG_MODE none
 
 ENV HANDBRAKE_URL https://api.github.com/repos/HandBrake/HandBrake/releases/tags/$HANDBRAKE_VERSION
-
 ENV HANDBRAKE_URL_GIT https://github.com/HandBrake/HandBrake.git
-#ENV HANDBRAKE_URL_GIT https://github.com/HiWay-Media/Handbrake.git
+
 ENV DEBIAN_FRONTEND noninteractive
 
 
@@ -26,21 +19,16 @@ RUN apt-get update
 RUN apt-get install -y \
     curl diffutils file coreutils m4 xz-utils nasm python3 python3-pip appstream
 
-## Build dependencies
+## Install dependencies
 RUN apt-get install -y \
-    appstream autoconf automake autopoint build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libnuma-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libturbojpeg0-dev libvorbis-dev libx264-dev libxml2-dev libvpx-dev m4 make meson nasm ninja-build patch pkg-config python tar zlib1g-dev clang
-
+    autoconf automake build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libnuma-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libturbojpeg0-dev libvorbis-dev libx264-dev libxml2-dev libvpx-dev m4 make nasm ninja-build patch pkg-config python tar zlib1g-dev autopoint
+    
 ## Intel CSV dependencies
 RUN apt-get install -y libva-dev libdrm-dev
-
+    
 ## GTK GUI dependencies
 RUN apt-get install -y \ 
-    intltool libdbus-glib-1-dev libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libgudev-1.0-dev libnotify-dev libwebkit2gtk-4.0-dev
-
-RUN apt-get install -y \ 
-    libsrt-openssl-dev
-
-
+    intltool libayatana-appindicator-dev libdbus-glib-1-dev libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libgudev-1.0-dev libnotify-dev libwebkit2gtk-4.0-dev
 
 ## Install meson from pip
 RUN pip3 install -U meson
@@ -53,21 +41,16 @@ RUN git clone $HANDBRAKE_URL_GIT
 WORKDIR /HB/HandBrake
 
 RUN git checkout $HANDBRAKE_VERSION_TAG
-RUN cat /HB/HandBrake/contrib/ffmpeg/module.defs 
-ADD module.defs /HB/HandBrake/contrib/ffmpeg/module.defs
-RUN find / -xdev  -name module.defs -ls
 RUN ./scripts/repo-info.sh > version.txt
 
 RUN echo "Compiling HandBrake..."
 RUN ./configure --prefix=/usr/local \
                 --debug=$HANDBRAKE_DEBUG_MODE \
                 --disable-gtk-update-checks \
-                --enable-fdk-aac \
                 --enable-x265 \
                 --enable-numa \
-                --enable-qsv \
                 --enable-nvenc \
-                --enable-nvdec \
+                --enable-qsv \
                 --launch-jobs=$(nproc) \
                 --launch
 
@@ -90,7 +73,7 @@ ENV AUTOMATED_CONVERSION_FORMAT="mp4"
 ## URLs
 ENV APP_ICON_URL https://raw.githubusercontent.com/jlesage/docker-templates/master/jlesage/images/handbrake-icon.png
 
-ENV DVDCSS_NAME libdvd-pkg_1.4.3-1-1_all.deb
+ENV DVDCSS_NAME libdvd-pkg_1.4.2-1-1_all.deb
 ENV DVDCSS_URL http://ftp.br.debian.org/debian/pool/contrib/libd/libdvd-pkg/$DVDCSS_NAME
 
 WORKDIR /tmp
@@ -109,7 +92,7 @@ RUN apt-get install -y --no-install-recommends \
     tcl8.6 \
     wget \
     git
-
+    
 ## Handbrake dependencies
 RUN apt-get install -y \
     libass9 \
@@ -183,7 +166,6 @@ RUN \
 COPY --from=builder /usr/local /usr
 COPY --from=builder /HB/HandBrake/build/contrib/bin/ffmpeg /usr/local/bin/ffmpeg
 COPY --from=builder /HB/HandBrake/build/contrib/bin/ffprobe /usr/local/bin/ffprobe
-
 
 # Define mountable directories
 VOLUME ["/config"]
