@@ -105,13 +105,9 @@ ENV DEBIAN_FRONTEND noninterac1tive
 #
 # Copy HandBrake from base build image
 COPY --from=builder /usr/local /usr
-COPY --from=builder /HB/HandBrake/build/contrib/bin/ffmpeg /usr/local/bin/ffmpeg
-COPY --from=builder /HB/HandBrake/build/contrib/bin/ffprobe /usr/local/bin/ffprobe
-# Define mountable directories
-VOLUME ["/config"]
-VOLUME ["/storage"]
-VOLUME ["/output"]
-VOLUME ["/watch"]
+COPY --from=builder /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
+COPY --from=builder /usr/local/bin/ffprobe /usr/local/bin/ffprobe
+#
 #
 CMD ["/bin/bash"]
 #
