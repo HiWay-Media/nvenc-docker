@@ -81,7 +81,6 @@ RUN apt-get install -y \
     libc6 \
     libcairo2 \
     libdvdnav4 \
-    libdvdread8 \
     libgdk-pixbuf2.0-0 \
     libglib2.0-0 \
     libgstreamer-plugins-base1.0-0 \
@@ -96,11 +95,15 @@ RUN apt-get install -y \
     libtheora0 \
     libvorbis0a \
     libvorbisenc2 \
-    libx264-160 \
-    libx265-192 \
     libxml2 \
-    libturbojpeg0
+    libturbojpeg0 \
+    libdvdread4 \
+    libx264-155 \
+    libx265-165 \
 
+
+
+   
 RUN echo "Compiled ffmpeg nvenc..."
 #
 ######################################################################
