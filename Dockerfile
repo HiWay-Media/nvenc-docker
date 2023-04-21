@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM debian:11.10-slim
+FROM debian:10.10-slim
 #
 MAINTAINER Allan-Nava
 #
