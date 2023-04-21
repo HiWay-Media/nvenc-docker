@@ -1,4 +1,4 @@
-name: Dockerimage with Dockerfile
+name: Docker FFmpeg Nvenc 5.1.2
 #
 on:
   push:
