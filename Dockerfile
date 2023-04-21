@@ -99,7 +99,7 @@ RUN apt-get install -y \
     libturbojpeg0 \
     libdvdread4 \
     libx264-155 \
-    libx265-165 \
+    libx265-165 
 
 
 
