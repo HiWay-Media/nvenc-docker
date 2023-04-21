@@ -34,15 +34,15 @@ jobs:
           REG=ghcr.io
           IMAGE=$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
           DOCKER_IMAGE=${REG}/${IMAGE}
-          VERSION=nool
+          VERSION=nool-ffmpeg5.1.2
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            VERSION=nightly
+            VERSION=nightly-ffmpeg5.1.2
           elif [[ $GITHUB_REF == refs/tags/* ]]; then
-            VERSION=${GITHUB_REF#refs/tags/}
+            VERSION=${GITHUB_REF#refs/tags/}-ffmpeg5.1.2
           elif [[ $GITHUB_REF == refs/heads/* ]]; then
-            VERSION=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')
+            VERSION=$(echo ${GITHUB_REF#refs/heads/} | sed -r 's#/+#-#g')-ffmpeg5.1.2
             if [ "${{ github.event.repository.default_branch }}" = "$VERSION" ]; then
-              VERSION=latest
+              VERSION=latest-ffmpeg5.1.2
             fi
           elif [[ $GITHUB_REF == refs/pull/* ]]; then
             VERSION=pr-${{ github.event.number }}
