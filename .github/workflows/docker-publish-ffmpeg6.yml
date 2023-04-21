@@ -1,4 +1,4 @@
-name: Dockerimage with Dockerfile
+name: Docker FFmpeg6.0
 #
 on:
   push:
