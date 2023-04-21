@@ -22,8 +22,9 @@ RUN apt-get install -y libva-dev libdrm-dev
 RUN apt-get install -y \ 
     intltool libayatana-appindicator-dev libdbus-glib-1-dev libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libgudev-1.0-dev libnotify-dev libwebkit2gtk-4.0-dev
 #
-RUN git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git \
-	&& cd nv-codec-headers \
+#RUN git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git \
+	#&& cd nv-codec-headers \
+RUN git clone -b sdk/11.0 https://github.com/FFmpeg/nv-codec-headers.git \
 	&& make \
 	&& make install
 #
