@@ -1,5 +1,5 @@
 FROM debian:10
-#AS builder
+#
 MAINTAINER Allan-Nava
 #
 ENV NVIDIA_VISIBLE_DEVICES all
