@@ -1,5 +1,10 @@
-FROM debian:11 AS builder
+FROM debian:11 
+#AS builder
 MAINTAINER Allan-Nava
+#
+ENV NVIDIA_VISIBLE_DEVICES all
+ENV NVIDIA_DRIVER_CAPABILITIES all
+ENV DEBIAN_FRONTEND noninterac1tive
 #
 ## Prepare
 RUN apt-get update
@@ -94,20 +99,8 @@ RUN apt-get install -y \
     libturbojpeg0
 
 RUN echo "Compiled ffmpeg nvenc..."
-
-##########################################################################################
-## Pull base image
-FROM jlesage/baseimage-gui:debian-10
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES all
-ENV DEBIAN_FRONTEND noninterac1tive
 #
-#
-# Copy HandBrake from base build image
-COPY --from=builder /usr/local /usr
-COPY --from=builder /usr/local/bin/ffmpeg /usr/local/bin/ffmpeg
-COPY --from=builder /usr/local/bin/ffprobe /usr/local/bin/ffprobe
-#
+######################################################################
 #
 CMD ["/bin/bash"]
 #
