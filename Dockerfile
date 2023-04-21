@@ -1,10 +1,13 @@
-FROM debian:10
+# syntax=docker/dockerfile:1
+FROM debian:11.10-slim
 #
 MAINTAINER Allan-Nava
 #
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES all
 ENV DEBIAN_FRONTEND noninterac1tive
+#
+WORKDIR /app
 #
 ## Prepare
 RUN apt-get update
@@ -16,11 +19,8 @@ RUN apt-get install -y \
     autoconf automake build-essential cmake git libass-dev libbz2-dev libfontconfig1-dev libfreetype6-dev libfribidi-dev libharfbuzz-dev libjansson-dev liblzma-dev libmp3lame-dev libnuma-dev libogg-dev libopus-dev libsamplerate-dev libspeex-dev libtheora-dev libtool libtool-bin libturbojpeg0-dev libvorbis-dev libx264-dev libxml2-dev libvpx-dev m4 make nasm ninja-build patch pkg-config python tar zlib1g-dev autopoint imagemagick gsfonts wget
     
 ## Intel CSV dependencies
-RUN apt-get install -y libva-dev libdrm-dev
+#RUN apt-get install -y libva-dev libdrm-dev
 #   
-## GTK GUI dependencies
-RUN apt-get install -y \ 
-    intltool libayatana-appindicator-dev libdbus-glib-1-dev libglib2.0-dev libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgtk-3-dev libgudev-1.0-dev libnotify-dev libwebkit2gtk-4.0-dev
 #
 #RUN git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git \
 	#&& cd nv-codec-headers \
@@ -103,11 +103,10 @@ RUN apt-get install -y \
     libdvdread4 \
     libx264-155 \
     libx265-165 
-
-
-
-   
-RUN echo "Compiled ffmpeg nvenc..."
+#
+#
+#   
+#RUN echo "Compiled ffmpeg nvenc..."
 #
 ######################################################################
 #
