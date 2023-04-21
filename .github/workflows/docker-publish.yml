@@ -2,9 +2,9 @@ name: Docker FFmpeg Nvenc 5.1.2
 #
 on:
   push:
-    branches: 
-      - master
-      - main
+    #branches: 
+    #  - master
+    #  - main
     tags:
       - '*'
 #
