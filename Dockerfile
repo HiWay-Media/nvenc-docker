@@ -48,7 +48,10 @@ RUN cd ffmpeg-5.1.2 \
     --enable-gray\ 
     --enable-libmp3lame\ 
     --enable-libopus\ 
-    --enable-libvpx\ --enable-libx264  \
+    --enable-libvpx\ 
+    --enable-libx264  \
+    --extra-cflags=-I/usr/local/cuda/include \
+    --extra-ldflags=-L/usr/local/cuda/lib64 \
  && make install \
  && cd ..
 #
