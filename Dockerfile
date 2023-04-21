@@ -1,4 +1,4 @@
-FROM debian:11 
+FROM debian:10
 #AS builder
 MAINTAINER Allan-Nava
 #
