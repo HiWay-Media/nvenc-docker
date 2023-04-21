@@ -25,9 +25,11 @@ RUN apt-get install -y \
 #RUN git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git \
 	#&& cd nv-codec-headers \
 RUN git clone -b sdk/11.0 https://github.com/FFmpeg/nv-codec-headers.git \
+	&& cd nv-codec-headers \
 	&& make \
 	&& make install
 #
+
 RUN wget https://ffmpeg.org/releases/ffmpeg-5.1.2.tar.xz \
  && tar -xf ffmpeg-5.1.2.tar.xz \
  && rm ffmpeg-5.1.2.tar.xz
