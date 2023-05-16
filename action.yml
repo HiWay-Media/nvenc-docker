@@ -9,6 +9,11 @@ inputs:
     description: 'ffmpeg command'
     required: true
     default: '-i'
+#
+branding:
+  icon: 'video'
+  color: 'blue'
+#
 runs:
   using: 'docker'
   image: 'Dockerfile'
