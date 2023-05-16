@@ -45,7 +45,7 @@ Customize the input and output paths and the encoding command as per your requir
 
 For more detailed usage examples and additional information, please refer to the documentation.
 
-## Contributing
+## Contributing
 Contributions to nvenc-docker are welcome! If you have any suggestions, improvements, or bug fixes, feel free to open an issue or submit a pull request.
 
 ## License
