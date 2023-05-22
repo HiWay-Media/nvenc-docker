@@ -58,6 +58,6 @@ jobs:
       # Set up Buildx env
       - uses: webgtx/gcr-podman-action@v2
         with:
-          project_id: init64
+          project_id: nvenc-docker
           image_id: webgtx-blog:latest
           access_token: ${{ secrets.GOOGLE_JSON_KEY }}
